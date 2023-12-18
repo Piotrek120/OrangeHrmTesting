@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "vf9BBklDztQawAMw+pu0O0tSp9xrBfh0lTQvw7C+OFd/GJKskk1HDqFB989c0AFL3aNh87H63SmpgAOpFvdrbg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Domowy\\Desktop\\Testowanie\\OrangeHrmTesting\\OrangeHrmTestingGuiFramework\\OrangeHrmTestingGuiFramework.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Domowy\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Domowy\\.nuget\\packages\\selenium.webdriver\\4.16.2\\selenium.webdriver.4.16.2.nupkg.sha512"
+  ],
+  "logs": []
+}
