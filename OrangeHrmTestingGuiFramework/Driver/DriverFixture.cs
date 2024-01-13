@@ -9,21 +9,10 @@ namespace OrangeHrmTestingGuiFramework.Driver
 {
     public class DriverFixture : IDriverFixture, IDisposable
     {
+        private IWebDriver _driver;
         private readonly TestParameters _testParameters;
         public string CurrentUrl => Driver.Url;
-        public IWebDriver Driver {  get; set; }
-        /*{
-            get
-            {
-                return _testParameters.BrowserType switch
-                {
-                    BrowserType.Chrome => new ChromeDriver(),
-                    BrowserType.Firefox => new FirefoxDriver(),
-                    BrowserType.Safari => new SafariDriver(),
-                    _ => new ChromeDriver()
-                };
-            }
-        }*/
+        public IWebDriver Driver => _driver ??= GetWebDriver();
 
         private IWebDriver GetWebDriver()
         {
@@ -39,7 +28,10 @@ namespace OrangeHrmTestingGuiFramework.Driver
         public DriverFixture(TestParameters testParameters)
         {
             _testParameters = testParameters;
-            Driver = GetWebDriver();
+        }
+
+        public void NavigateToMainPage()
+        {
             Driver.Navigate().GoToUrl(_testParameters.ApplicationUrl);
         }
 

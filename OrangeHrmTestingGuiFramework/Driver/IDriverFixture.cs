@@ -6,5 +6,6 @@ namespace OrangeHrmTestingGuiFramework.Driver
     {
         IWebDriver Driver { get; }
         string CurrentUrl { get; }
+        void NavigateToMainPage ();
     }
 }

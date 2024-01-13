@@ -2,6 +2,7 @@
 using OrangeHrmTestingGuiFramework.Config;
 using OrangeHrmTestingGuiFramework.Driver;
 using OrangeHrmTestingGuiFramework.Pages;
+using OrangeHrmTests.UnitTests;
 
 namespace OrangeHrmTests
 {
@@ -13,7 +14,8 @@ namespace OrangeHrmTests
                 .AddSingleton(ReaderConfig.ReadConfig())
                 .AddScoped<IDriverFixture, DriverFixture>()
                 .AddScoped<IDriverWait, DriverWait>()
-                .AddScoped<IHomePage, HomePage>();
+                .AddScoped<ILoginPage, LoginPage>()
+                .AddScoped<ITabPanel, TabPanel>();
         }
     }
 }

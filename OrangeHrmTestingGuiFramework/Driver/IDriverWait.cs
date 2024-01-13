@@ -13,5 +13,7 @@ namespace OrangeHrmTestingGuiFramework.Driver
         IEnumerable<IWebElement> FindElements(By elementLocator);
         bool CheckIfElementExist(By elementLocator);
         string GetCurrentUrl();
+        bool CheckIfPageChanged(string startPage);
+        bool WaitForPageLoad();
     }
 }

@@ -25,6 +25,23 @@ namespace OrangeHrmTestingGuiFramework.Extensions
                 }
             };
         }
+
+        public static Func<IWebDriver, bool> PathsEquals(string startPage, Func<string> expectedPage)
+        {
+            //return startPage == expectedPage();
+            return (driver) =>
+            {
+                try
+                {
+                    var condition = startPage == expectedPage();
+                    return condition;
+                }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
+            };
+        }
     }
 
 }

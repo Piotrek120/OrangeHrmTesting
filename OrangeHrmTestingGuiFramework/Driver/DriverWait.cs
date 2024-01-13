@@ -66,6 +66,7 @@ namespace OrangeHrmTestingGuiFramework.Driver
         /// </returns>
         public IWebElement FindElement(By elementLocator)
         {
+            CheckIfElementExist(elementLocator);
             return WebDriverWait.Value.Until(_ => DriverFixture.Driver.FindElement(elementLocator));
         }
 
@@ -80,6 +81,7 @@ namespace OrangeHrmTestingGuiFramework.Driver
         /// </returns>
         public IEnumerable<IWebElement> FindElements(By elementLocator)
         {
+            CheckIfElementExist(elementLocator);
             return WebDriverWait.Value.Until(_ => DriverFixture.Driver.FindElements(elementLocator));
         }
 
@@ -93,7 +95,6 @@ namespace OrangeHrmTestingGuiFramework.Driver
             return string.Empty;
         }
 
-
         public bool CheckIfElementExist(By selector)
         {
             return WebDriverWait.Value.Until(ExpectedConditionsExtensions.ElementIsVisible(selector));
@@ -101,7 +102,15 @@ namespace OrangeHrmTestingGuiFramework.Driver
 
         public bool WaitForPageLoad()
         {
-            return WebDriverWait.Value.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+            return WebDriverWait.Value.Until(driver => 
+            ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        public bool CheckIfPageChanged(string startPage)
+        {
+            WaitForPageLoad();
+            Func<string> func = () => GetCurrentUrl();
+            return !WebDriverWait.Value.Until(ExpectedConditionsExtensions.PathsEquals(startPage, func)); //WebDriverWait.Value.Until(_ => startPage != GetCurrentUrl());
         }
 
         #endregion
@@ -118,7 +127,7 @@ namespace OrangeHrmTestingGuiFramework.Driver
         {
             return new(DriverFixture.Driver, timeout: TimeSpan.FromSeconds(TestSettings.TimeoutInterval ?? 20))
             {
-                PollingInterval = TimeSpan.FromSeconds(1),
+                PollingInterval = TimeSpan.FromSeconds(2),
             };
         }
 
