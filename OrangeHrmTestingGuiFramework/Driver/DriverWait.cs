@@ -3,6 +3,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OrangeHrmTestingGuiFramework.Config;
+using OrangeHrmTestingGuiFramework.Extensions;
 
 #endregion
 
@@ -82,6 +83,27 @@ namespace OrangeHrmTestingGuiFramework.Driver
             return WebDriverWait.Value.Until(_ => DriverFixture.Driver.FindElements(elementLocator));
         }
 
+        public string GetCurrentUrl()
+        {
+            if (WaitForPageLoad())
+            {
+                return DriverFixture.CurrentUrl;
+            }
+
+            return string.Empty;
+        }
+
+
+        public bool CheckIfElementExist(By selector)
+        {
+            return WebDriverWait.Value.Until(ExpectedConditionsExtensions.ElementIsVisible(selector));
+        }
+
+        public bool WaitForPageLoad()
+        {
+            return WebDriverWait.Value.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
         #endregion
 
         #region Private Methods
@@ -92,11 +114,11 @@ namespace OrangeHrmTestingGuiFramework.Driver
         /// <returns>
         ///     The WebDriverWait.
         /// </returns>
-        private WebDriverWait GetWaitDriver()
+        public WebDriverWait GetWaitDriver()
         {
             return new(DriverFixture.Driver, timeout: TimeSpan.FromSeconds(TestSettings.TimeoutInterval ?? 20))
             {
-                PollingInterval = TimeSpan.FromSeconds(TestSettings.TimeoutInterval ?? 1),
+                PollingInterval = TimeSpan.FromSeconds(1),
             };
         }
 

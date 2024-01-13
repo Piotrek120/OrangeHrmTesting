@@ -5,5 +5,6 @@ namespace OrangeHrmTestingGuiFramework.Driver
     public interface IDriverFixture
     {
         IWebDriver Driver { get; }
+        string CurrentUrl { get; }
     }
 }

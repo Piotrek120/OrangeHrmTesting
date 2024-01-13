@@ -11,5 +11,7 @@ namespace OrangeHrmTestingGuiFramework.Driver
     {
         IWebElement FindElement(By elementLocator);
         IEnumerable<IWebElement> FindElements(By elementLocator);
+        bool CheckIfElementExist(By elementLocator);
+        string GetCurrentUrl();
     }
 }
